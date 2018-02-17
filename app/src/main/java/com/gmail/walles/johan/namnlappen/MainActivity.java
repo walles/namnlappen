@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onInit(int i) {
                         ttsStatus = i;
                         if (ttsStatus == TextToSpeech.SUCCESS) {
+                            Timber.i("Setting up TTS: Success!");
                             updateChallenge();
                         } else {
                             Timber.e("Error setting up TTS: status=%d", i);
@@ -140,6 +141,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         speak(challenge.question, false);
     }
 
+    public static String capitalize(CharSequence string) {
+        StringBuilder builder = new StringBuilder();
+
+        builder.append(Character.toTitleCase(string.charAt(0)));
+        for (int i = 1; i < string.length(); i++) {
+            builder.append(Character.toLowerCase(string.charAt(i)));
+        }
+
+        return builder.toString();
+    }
+
     @Override
     public void onClick(View view) {
         if (!(view instanceof Button)) {
@@ -150,11 +162,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (TextUtils.equals(button.getText(), challenge.answer)) {
             // Praise the user and pick a new letter
             String praise = PRAISE[new Random().nextInt(PRAISE.length)];
-            speak("\"" + challenge.answer + "\", " + praise + "!", true);
+            speak("\"" + capitalize(challenge.answer) + "\", " + praise + "!", true);
             updateChallenge();
         } else {
             // Prompt the user to try again
-            speak("\"" + button.getText() + "\" var fel, försök hitta \"" + challenge.answer + "\"!", true);
+            speak("\"" + capitalize(button.getText()) + "\" var fel, försök hitta \"" + capitalize(challenge.answer) + "\"!", true);
         }
     }
 }

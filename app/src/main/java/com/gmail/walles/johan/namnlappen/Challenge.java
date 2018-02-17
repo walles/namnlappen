@@ -14,7 +14,7 @@ class Challenge {
 
     public Challenge() {
         answer = "MELVIN";
-        question = "Tryck på knappen där det står " + answer + "!";
+        question = "Tryck på knappen där det står " + MainActivity.capitalize(answer) + "!";
         options = createOptions(answer);
     }
 
