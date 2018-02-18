@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Locale;
 import java.util.Random;
 
 import timber.log.Timber;
@@ -19,6 +20,7 @@ import timber.log.Timber;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String[] PRAISE = { "bra", "fint", "utmärkt", "schysst", "apigt bra" };
+    private static final Locale SV_SE = new Locale("sv");
 
     @Nullable
     private TextToSpeech textToSpeech;
@@ -162,11 +164,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (TextUtils.equals(button.getText(), challenge.answer)) {
             // Praise the user and pick a new letter
             String praise = PRAISE[new Random().nextInt(PRAISE.length)];
-            speak(capitalize(praise) + " " + capitalize(challenge.answer) + ", det var rätt! Här kommer en ny fråga.", true);
+            speak(String.format(SV_SE, "%s %s, det var rätt! Här kommer en ny fråga.",
+                    capitalize(praise),
+                    capitalize(challenge.answer)),
+                    true);
             updateChallenge();
         } else {
             // Prompt the user to try again
-            speak("\"" + capitalize(button.getText()) + "\" var fel, försök hitta \"" + capitalize(challenge.answer) + "\"!", true);
+            speak(String.format(SV_SE, "\"%s\" var fel, försök hitta \"%s\"!",
+                    capitalize(button.getText()),
+                    capitalize(challenge.answer)),
+                    true);
         }
     }
 }
