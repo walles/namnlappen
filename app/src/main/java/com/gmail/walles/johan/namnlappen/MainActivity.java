@@ -171,8 +171,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             updateChallenge();
         } else {
             // Prompt the user to try again
-            speak(String.format(SV_SE, "\"%s\" var fel, försök hitta \"%s\"!",
-                    capitalize(button.getText()),
+            speak(String.format(SV_SE, "%s, försök igen!",
+                    capitalize(challenge.getHint(button.getText())),
                     capitalize(challenge.answer)),
                     true);
         }
