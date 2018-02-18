@@ -18,7 +18,7 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String[] PRAISE = { "bra", "fint", "utmärkt" };
+    private static final String[] PRAISE = { "bra", "fint", "utmärkt", "schysst", "apigt bra" };
 
     @Nullable
     private TextToSpeech textToSpeech;
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (TextUtils.equals(button.getText(), challenge.answer)) {
             // Praise the user and pick a new letter
             String praise = PRAISE[new Random().nextInt(PRAISE.length)];
-            speak("\"" + capitalize(challenge.answer) + "\", " + praise + "!", true);
+            speak(capitalize(praise) + " " + capitalize(challenge.answer) + ", det var rätt! Här kommer en ny fråga.", true);
             updateChallenge();
         } else {
             // Prompt the user to try again
